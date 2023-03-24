@@ -30,14 +30,18 @@ def get_characters():
 def get_character_details():
     if request.method == "POST":
         name = request.form.get("character-name")
-        slug_name = name.lower().replace(" ", "-")
-        character_endpoint = f"https://api.potterdb.com/v1/characters/{slug_name}"
-        try:
-            character_details = requests.get(character_endpoint).json()["data"]
-            return render_template("character_details.html", character=character_details)
-        except KeyError:
-            flash("Please kindly try another name.")
+        if name == "":
+            flash("Please enter the name.")
             return redirect(url_for("get_characters"))
+        else:
+            slug_name = name.lower().replace(" ", "-")
+            character_endpoint = f"https://api.potterdb.com/v1/characters/{slug_name}"
+            try:
+                character_details = requests.get(character_endpoint).json()["data"]
+                return render_template("character_details.html", character=character_details)
+            except KeyError:
+                flash("Please kindly try another name.")
+                return redirect(url_for("get_characters"))
 
 
 @app.route("/books")

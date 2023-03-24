@@ -177,6 +177,10 @@ table, th, td {
     font-size: 2rem;
   }
 
+  .error-message {
+    padding: auto;
+  }
+
   .search-button {
     margin: auto;
   }
