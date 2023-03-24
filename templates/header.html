@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!--    bootstrap css-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+<!--        external css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+<!--    favicon-->
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+<!--    font awesome-->
+    <script src="https://kit.fontawesome.com/75165f36e7.js" crossorigin="anonymous"></script>
+
+<!--    google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Playfair+Display&family=Rouge+Script&family=Shantell+Sans&display=swap" rel="stylesheet">
+
+    <title>Harry Potter</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="{{ url_for('home') }}">Harry Potter</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          {% if characters: %}
+            <li>
+                <form class="form-inline my-2 my-lg-0" action="{{ url_for('get_character_details') }}" method="POST">
+                  <input class="form-control mr-sm-2 search-box" type="search" name="character-name" placeholder="Search character" aria-label="Search">
+                  <button class="search-button my-2 my-sm-0" type="submit"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </li>
+          {% else: %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('get_characters') }}">Characters</a>
+            </li>
+          {% endif %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('get_books') }}">Books</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('get_spells_1') }}">Spells</a>
+            </li>
+        </ul>
+      </div>
+    </nav>
